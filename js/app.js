@@ -566,6 +566,9 @@ async function enableCompass(){
 async function navStart(){
   if (trackLatLngs.length < 2){ toast('Сначала загрузите трек тропы'); return; }
   if (!navigator.geolocation){ toast('Геолокация недоступна'); return; }
+  if (location.protocol === 'http:' && location.hostname !== 'localhost'){
+    toast('Навигация доступна только по HTTPS. Откройте baltictrail.ru', 4000); return;
+  }
   navOn = true; navWasOff = false;
   try { localStorage.setItem(NAV_ON_KEY, '1'); } catch {}
   $('#navBar').hidden = false; $('#navBar').classList.remove('off');
@@ -575,6 +578,13 @@ async function navStart(){
   await enableCompass();
   closePanel();
   if (lastLL) updateNav(lastLL);
+  // Timeout: if GPS doesn't respond in 15s, show hint
+  clearTimeout(navStart._t);
+  navStart._t = setTimeout(() => {
+    if (navOn && !lastLL){
+      $('#navSub').textContent = 'GPS не отвечает. Проверьте настройки геолокации.';
+    }
+  }, 15000);
 }
 function navStop(){
   navOn = false; follow = false;
@@ -940,7 +950,10 @@ loadUserPoints();
 const navBtnInit = $('#btnNav'); if (navBtnInit) navBtnInit.hidden = true;   // shown once a track is loaded
 // If location was already allowed before — start tracking right away so the map opens "where you are now",
 // and remember to resume trail navigation if it was on when the app was last closed.
-if (localStorage.getItem(NAV_ON_KEY) === '1') navResumeWanted = true;
+if (localStorage.getItem(NAV_ON_KEY) === '1'){
+  if (location.protocol === 'https:' || location.hostname === 'localhost') navResumeWanted = true;
+  else try { localStorage.removeItem(NAV_ON_KEY); } catch {}
+}
 if (navigator.permissions && navigator.permissions.query){
   navigator.permissions.query({ name:'geolocation' }).then(st => {
     if (st.state === 'granted') ensureGeoWatch();
