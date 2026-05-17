@@ -1,5 +1,5 @@
 /* Service worker: app shell precache + runtime tile cache (offline-in-the-forest) */
-const APP_CACHE = 'tropa-app-v19';
+const APP_CACHE = 'tropa-app-v20';
 const TILE_CACHE = 'tropa-tiles-v1';
 const MAX_TILES = 4000; // rough cap so we don't fill the disk
 
