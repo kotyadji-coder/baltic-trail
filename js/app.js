@@ -879,6 +879,13 @@ if (adminLogoutBtn) adminLogoutBtn.onclick = () => {
     // Step 2: request geo
     const geoBtn = $('#obGeo');
     if (geoBtn) geoBtn.onclick = () => {
+      if (!navigator.geolocation || location.protocol === 'http:' && location.hostname !== 'localhost'){
+        const d = $('#obGeoDenied');
+        if (d){ d.textContent = 'Геолокация доступна только по HTTPS. Откройте https://baltictrail.ru'; d.classList.remove('hidden'); }
+        return;
+      }
+      geoBtn.textContent = 'Запрашиваю...';
+      geoBtn.disabled = true;
       navigator.geolocation.getCurrentPosition(
         () => {
           ensureGeoWatch();
@@ -886,10 +893,10 @@ if (adminLogoutBtn) adminLogoutBtn.onclick = () => {
           else closeAll();
         },
         (err) => {
-          if (err.code === 1){
-            const d = $('#obGeoDenied');
-            if (d) d.classList.remove('hidden');
-          }
+          geoBtn.textContent = 'Включить геолокацию';
+          geoBtn.disabled = false;
+          const d = $('#obGeoDenied');
+          if (d) d.classList.remove('hidden');
         },
         { timeout: 10000 }
       );
@@ -902,24 +909,26 @@ if (adminLogoutBtn) adminLogoutBtn.onclick = () => {
 
     // Step 3: install
     const installBtn = $('#obInstall');
-    if (installBtn) installBtn.onclick = async () => {
-      if (deferredPrompt){
-        deferredPrompt.prompt();
-        await deferredPrompt.userChoice;
-        deferredPrompt = null;
-        closeAll();
-      } else {
-        // Show manual instructions
-        const hint = $('#obInstallHint');
-        if (hint){
-          const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-          hint.innerHTML = isIOS
-            ? 'Нажмите кнопку «Поделиться» (квадрат со стрелкой) внизу Safari, затем «На экран Домой».'
-            : 'В меню браузера (три точки) выберите «Добавить на главный экран» или «Установить приложение».';
-          hint.classList.remove('hidden');
+    const installHint = $('#obInstallHint');
+    // Show hint immediately if no prompt available
+    if (installBtn && !deferredPrompt && installHint){
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      installHint.innerHTML = isIOS
+        ? '<strong>iPhone/iPad:</strong> Нажмите кнопку «Поделиться» (квадрат со стрелкой) внизу Safari → «На экран Домой».'
+        : '<strong>Chrome:</strong> Нажмите три точки в правом верхнем углу → «Установить приложение» или «Добавить на главный экран».';
+      installHint.classList.remove('hidden');
+      installBtn.textContent = 'Понятно';
+      installBtn.onclick = () => closeAll();
+    } else if (installBtn) {
+      installBtn.onclick = async () => {
+        if (deferredPrompt){
+          deferredPrompt.prompt();
+          await deferredPrompt.userChoice;
+          deferredPrompt = null;
         }
-      }
-    };
+        closeAll();
+      };
+    }
     const skipInstall = $('#obSkipInstall');
     if (skipInstall) skipInstall.onclick = () => closeAll();
   }
