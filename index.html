@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5" />
+<title>Балтийская Тропа — треккинг в Калининградской области</title>
+<meta name="description" content="Пешеходный маршрут от Зеленоградска до Краснолесья через всю Калининградскую область. Карта, навигация, офлайн. Заброшенные кирхи, озёра, леса и поля." />
+<meta name="keywords" content="треккинг Калининград, пешие походы Калининградская область, хайкинг Калининград, балтийская тропа, пешеходный маршрут Зеленоградск" />
+<link rel="canonical" href="https://baltictrail.ru/" />
+<meta property="og:title" content="Балтийская Тропа — треккинг в Калининградской области" />
+<meta property="og:description" content="Пешеходный маршрут от побережья Балтики до древних лесов. Карта с навигацией, работает офлайн." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://baltictrail.ru/" />
+<meta property="og:locale" content="ru_RU" />
+<meta name="theme-color" content="#1b5e20" />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="mobile-web-app-capable" content="yes" />
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div id="map" aria-label="Карта тропы"></div>
+
+<!-- Top bar -->
+<header id="topbar">
+  <div class="logo-group">
+    <svg class="logo-icon" viewBox="0 0 40 40" width="34" height="34" aria-hidden="true">
+      <circle cx="20" cy="20" r="19" fill="#29b6f6"/>
+      <path d="M8 22 Q14 16 20 20 Q26 16 32 22" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="title">
+      <strong id="trailName">Балтийская Тропа</strong>
+      <span id="trailStats" class="stats"></span>
+    </div>
+  </div>
+  <div class="top-actions">
+    <button id="btnInstall" class="chip" hidden>Установить</button>
+    <span id="netStatus" class="chip net" title="Состояние сети"></span>
+    <button id="btnMenu" class="chip" aria-label="Меню">☰</button>
+  </div>
+</header>
+
+<!-- Floating map buttons -->
+<div id="mapButtons">
+  <button id="btnNav" class="mapbtn" title="Навигация по тропе" hidden>🧭</button>
+  <button id="btnLocate" class="mapbtn" title="Моё местоположение">◎</button>
+  <button id="btnFit" class="mapbtn" title="Показать всю тропу">⤢</button>
+  <button id="btnAdd" class="mapbtn primary admin-only" title="Добавить точку">＋</button>
+</div>
+
+<!-- Navigation bar -->
+<div id="navBar" hidden role="status">
+  <div id="navArrow" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 3 L31 33 L20 26 L9 33 Z"/></svg></div>
+  <div class="nav-text">
+    <div id="navMain">Веду по тропе…</div>
+    <div id="navSub" class="nav-sub">—</div>
+  </div>
+  <button id="navClose" aria-label="Выключить навигацию">✕</button>
+</div>
+
+<!-- Recording badge -->
+<div id="recBadge" hidden>● Запись трека · <span id="recInfo">0.00 км</span> <button id="btnRecStop">Стоп</button></div>
+
+<!-- Elevation profile -->
+<div id="elevWrap" hidden>
+  <button id="elevToggle" title="Свернуть/развернуть профиль">⌃</button>
+  <svg id="elev" viewBox="0 0 1000 140" preserveAspectRatio="none" aria-label="Профиль высот"></svg>
+  <div id="elevTip" hidden></div>
+</div>
+
+<!-- Side menu / panel -->
+<div id="panelBackdrop" hidden></div>
+<aside id="panel" hidden>
+  <div class="panel-head">
+    <strong>Балтийская Тропа</strong>
+    <button id="panelClose" aria-label="Закрыть">✕</button>
+  </div>
+
+  <section>
+    <h3>Слои карты</h3>
+    <label class="row"><input type="radio" name="base" value="osm" checked> Обычная (OSM)</label>
+    <label class="row"><input type="radio" name="base" value="topo"> Топографическая</label>
+    <label class="row"><input type="checkbox" id="chkPoints" checked> Показывать точки</label>
+    <label class="row"><input type="checkbox" id="chkTrack" checked> Показывать трек</label>
+  </section>
+
+  <section>
+    <h3>Навигация по тропе</h3>
+    <p class="hint">Стрелка ведёт по тропе, показывает «осталось / пройдено» и ближайшую точку, вибрирует и предупреждает, если вы отклонились от тропы.</p>
+    <button id="btnNavStart" class="btn">🧭 Вести по тропе</button>
+  </section>
+
+  <section>
+    <h3>Офлайн</h3>
+    <p class="hint">Скачайте карту видимой области заранее — в лесу будет работать без интернета.</p>
+    <button id="btnCacheArea" class="btn">⬇ Скачать карту этой области</button>
+    <div id="cacheProgress" class="hint"></div>
+    <button id="btnClearTiles" class="btn ghost">Очистить скачанные тайлы</button>
+  </section>
+
+  <section class="admin-only">
+    <h3>Разметка тропы · админ</h3>
+    <button id="btnRecStart" class="btn">● Записать трек по GPS</button>
+    <p class="hint">Идите по тропе с телефоном — приложение запишет трек, потом сохраните его в файл.</p>
+    <button id="btnImportGpx" class="btn ghost">Загрузить трек из файла (GPX)</button>
+    <input type="file" id="fileGpx" accept=".gpx,application/gpx+xml" hidden>
+  </section>
+
+  <section>
+    <h3>Точки интереса</h3>
+    <div id="poiList" class="poi-list"></div>
+    <div class="admin-only">
+      <button id="btnExportGeo" class="btn">⬆ Сохранить точки (GeoJSON)</button>
+      <button id="btnImportGeo" class="btn ghost">Загрузить точки из файла</button>
+      <input type="file" id="fileGeo" accept=".geojson,.json,application/geo+json" hidden>
+      <p class="hint">«Сохранить» скачивает файл <code>points.geojson</code> — положите его в папку <code>data/</code>, чтобы точки были у всех по умолчанию.</p>
+    </div>
+  </section>
+
+  <section>
+    <a href="/about" class="btn">🥾 О тропе</a>
+    <a href="/help" class="btn">❓ Как пользоваться картой</a>
+  </section>
+
+  <section class="admin-only">
+    <h3>Режим администратора</h3>
+    <p class="hint small">Вы вошли как администратор в этом браузере — можно добавлять и редактировать точки и трек. Данные добавленных точек хранятся в этом браузере; регулярно сохраняйте их в файл.</p>
+    <button id="btnAdminLogout" class="btn ghost">Выйти из режима администратора</button>
+  </section>
+</aside>
+
+<!-- Add / edit point dialog -->
+<div id="poiBackdrop" hidden></div>
+<div id="poiDialog" hidden role="dialog" aria-modal="true">
+  <h3 id="poiDlgTitle">Новая точка</h3>
+  <label>Название
+    <input type="text" id="poiName" maxlength="80" placeholder="Например: Смотровая на дюну">
+  </label>
+  <label>Категория
+    <select id="poiCat"></select>
+  </label>
+  <label>Примечание
+    <textarea id="poiDesc" rows="4" maxlength="2000" placeholder="Что тут интересного, на что обратить внимание…"></textarea>
+  </label>
+  <p class="hint" id="poiCoord"></p>
+  <div class="dlg-actions">
+    <button id="poiDelete" class="btn danger" hidden>Удалить</button>
+    <span style="flex:1"></span>
+    <button id="poiCancel" class="btn ghost">Отмена</button>
+    <button id="poiSave" class="btn primary">Сохранить</button>
+  </div>
+</div>
+
+<!-- Onboarding (multi-step) -->
+<div id="welcomeBackdrop"></div>
+<div id="welcomeCard">
+
+  <!-- Step 1: Welcome -->
+  <div class="ob-step" id="obStep1">
+    <div class="welcome-header">
+      <svg viewBox="0 0 40 40" width="52" height="52" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="#29b6f6"/>
+        <path d="M8 22 Q14 16 20 20 Q26 16 32 22" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h1>Балтийская Тропа</h1>
+      <p class="welcome-sub">Калининградская область</p>
+    </div>
+    <p class="welcome-text">Пешеходная тропа, которую прокладывают энтузиасты через всю Калининградскую область — от балтийского побережья Зеленоградска до древних лесов Виштынецкого природного парка у Краснолесья.</p>
+    <p class="welcome-text">По дороге — заброшенные немецкие кирхи, тихие лесные озёра, бескрайние поля, старые аллеи и деревни, где время будто остановилось.</p>
+    <div class="welcome-stages">
+      <div class="stage future"><span class="stage-marker"></span><div><strong>Янтарный — Светлогорск</strong><span class="stage-status">В планах</span></div></div>
+      <div class="stage future"><span class="stage-marker"></span><div><strong>Светлогорск — Зеленоградск</strong><span class="stage-status">В планах</span></div></div>
+      <div class="stage done"><span class="stage-marker"></span><div><strong>Зеленоградск — Чкаловск</strong><span class="stage-status">Готово</span></div></div>
+      <div class="stage next"><span class="stage-marker"></span><div><strong>Калининград — Черняховск</strong><span class="stage-status">Следующий этап</span></div></div>
+      <div class="stage future"><span class="stage-marker"></span><div><strong>Черняховск — Краснолесье</strong><span class="stage-status">В планах</span></div></div>
+    </div>
+    <button id="obNext1" class="btn primary">Далее</button>
+    <a href="/help" class="welcome-help">Как пользоваться картой</a>
+  </div>
+
+  <!-- Step 2: Geolocation -->
+  <div class="ob-step hidden" id="obStep2">
+    <div class="ob-icon">📍</div>
+    <h2 class="ob-title">Разрешите геолокацию</h2>
+    <p class="welcome-text">Чтобы показать ваше местоположение на карте и вести по тропе, приложению нужен доступ к GPS.</p>
+    <p class="welcome-text ob-hint">Нажмите «Разрешить» в запросе браузера. Без геолокации карта и трек будут работать, но навигация — нет.</p>
+    <button id="obGeo" class="btn primary">Включить геолокацию</button>
+    <button id="obSkipGeo" class="btn ghost">Пропустить</button>
+    <p class="ob-denied hidden" id="obGeoDenied">Геолокация запрещена. Чтобы разрешить позже:<br><strong>iPhone:</strong> аА слева от адреса → Настройки сайта → Геопозиция<br><strong>Android:</strong> замок слева от адреса → Местоположение → Разрешить</p>
+  </div>
+
+  <!-- Step 3: Install -->
+  <div class="ob-step hidden" id="obStep3">
+    <div class="ob-icon">📲</div>
+    <h2 class="ob-title">Установите приложение</h2>
+    <p class="welcome-text">Балтийская Тропа работает как обычное приложение — без интернета, прямо в лесу. Установите на домашний экран.</p>
+    <button id="obInstall" class="btn primary">Установить</button>
+    <button id="obSkipInstall" class="btn ghost">Позже</button>
+    <p class="ob-install-hint hidden" id="obInstallHint"></p>
+  </div>
+
+</div>
+
+<div id="toast" hidden></div>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

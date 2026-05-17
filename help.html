@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Как пользоваться картой — Балтийская Тропа</title>
+<meta name="theme-color" content="#1b5e20" />
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32" />
+<style>
+:root{--ink:#1d2421;--muted:#6b736d;--bg:#f6f7f5;--card:#fff;--line:#e0e3df;--blue:#29b6f6;--green:#1b5e20}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color:var(--ink);background:var(--bg);margin:0;padding:0;
+  -webkit-tap-highlight-color:transparent;
+}
+header{
+  background:var(--card);border-bottom:1px solid var(--line);
+  padding:14px 16px;display:flex;align-items:center;gap:10px;
+  position:sticky;top:0;z-index:10;
+}
+header a{color:var(--green);text-decoration:none;font-size:14px;font-weight:500;display:flex;align-items:center;gap:6px}
+header svg{flex:0 0 28px}
+header h1{margin:0;font-size:16px;flex:1}
+.container{max-width:640px;margin:0 auto;padding:20px 16px 60px}
+h2{font-size:18px;margin:28px 0 10px;color:var(--ink);display:flex;align-items:center;gap:8px}
+h2 .icon{font-size:22px}
+h3{font-size:15px;margin:18px 0 6px;color:var(--ink)}
+p,li{font-size:14px;line-height:1.6;color:#3a3f3c}
+ul,ol{padding-left:20px}
+li{margin:4px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+.tip{background:#e3f2fd;border:1px solid #bbdefb;border-radius:10px;padding:12px;margin:12px 0;font-size:13px;line-height:1.5}
+.tip strong{color:#0277bd}
+.warn{background:#fff3e0;border:1px solid #ffe0b2;border-radius:10px;padding:12px;margin:12px 0;font-size:13px;line-height:1.5}
+.warn strong{color:#e65100}
+kbd{background:#eef0ec;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:12px;font-family:inherit}
+.back-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--green);color:#fff;border:0;border-radius:10px;
+  padding:10px 18px;font-size:14px;font-weight:500;cursor:pointer;
+  text-decoration:none;margin-top:20px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/">
+    <svg viewBox="0 0 40 40" width="28" height="28">
+      <circle cx="20" cy="20" r="19" fill="#29b6f6"/>
+      <path d="M8 22 Q14 16 20 20 Q26 16 32 22" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
+  <h1>Как пользоваться картой</h1>
+</header>
+
+<div class="container">
+
+  <h2><span class="icon">🗺</span> Карта</h2>
+  <p>При открытии приложения вы видите карту с нанесённым треком тропы и точками интереса. Карту можно перемещать пальцем, приближать и отдалять щипком или кнопками зума.</p>
+  <div class="card">
+    <h3>Кнопки на карте</h3>
+    <ul>
+      <li><strong>◎ Моё местоположение</strong> — показывает, где вы сейчас. Синяя точка — это вы, треугольник показывает направление.</li>
+      <li><strong>⤢ Показать всю тропу</strong> — карта отодвинется, чтобы был виден весь трек целиком.</li>
+    </ul>
+  </div>
+
+  <h2><span class="icon">🧭</span> Навигация по тропе</h2>
+  <p>Главная функция приложения — вести вас по тропе, как навигатор.</p>
+  <ol>
+    <li>Нажмите кнопку <strong>🧭</strong> на карте или откройте меню и выберите «Вести по тропе».</li>
+    <li>Разрешите доступ к геолокации (и к компасу на iOS).</li>
+    <li>Появится панель навигации: стрелка показывает, куда идти, «пройдено / осталось» и ближайшая точка впереди.</li>
+    <li>Если вы отклонитесь от тропы дальше ~35 метров — телефон завибрирует и покажет предупреждение.</li>
+    <li>Чтобы выключить навигацию — нажмите крестик на панели.</li>
+  </ol>
+  <div class="tip">
+    <strong>Совет:</strong> Если вы закроете приложение с включённой навигацией, при следующем открытии она возобновится автоматически.
+  </div>
+
+  <h2><span class="icon">📍</span> Точки интереса</h2>
+  <p>На карте отмечены интересные места вдоль тропы: смотровые площадки, источники воды, заброшенные кирхи, привалы и другие объекты. Нажмите на маркер, чтобы увидеть название и описание.</p>
+  <p>Список всех точек можно посмотреть в меню, раздел «Точки интереса». Нажмите на любую — карта переместится к ней.</p>
+
+  <h2><span class="icon">📊</span> Профиль высот</h2>
+  <p>Внизу экрана — график высоты вдоль тропы. Проведите пальцем по графику, чтобы увидеть высоту в конкретной точке. Нажмите стрелку справа, чтобы свернуть или развернуть график.</p>
+
+  <h2><span class="icon">🗂</span> Слои карты</h2>
+  <p>В меню (☰) можно переключить вид карты:</p>
+  <ul>
+    <li><strong>Обычная (OSM)</strong> — стандартная карта с дорогами и зданиями.</li>
+    <li><strong>Топографическая</strong> — карта с рельефом, горизонталями и лесами. Удобна для походов.</li>
+  </ul>
+  <p>Там же можно включить или выключить отображение точек и трека.</p>
+
+  <h2><span class="icon">⬇</span> Работа без интернета</h2>
+  <p>Тропа проходит через леса и поля, где может не быть связи. Подготовьтесь заранее:</p>
+  <ol>
+    <li>Дома или на Wi-Fi откройте приложение и установите его на домашний экран (кнопка «Установить» или через меню браузера).</li>
+    <li>Приблизьте карту к нужному участку тропы.</li>
+    <li>Откройте меню → <strong>«Скачать карту этой области»</strong>. Приложение сохранит тайлы карты для текущего вида + 3 уровня приближения.</li>
+    <li>Если тропа длинная — приблизьте разные участки и скачайте карту для каждого.</li>
+  </ol>
+  <div class="warn">
+    <strong>Важно:</strong> Скачивайте карту по Wi-Fi — это может быть много мегабайт. Зелёная точка в правом верхнем углу показывает статус сети: зелёная = онлайн, красная = офлайн.
+  </div>
+
+  <h2><span class="icon">📱</span> Установка на телефон</h2>
+  <p>Балтийская Тропа — это PWA (Progressive Web App). Его можно установить как обычное приложение:</p>
+  <ul>
+    <li><strong>Android:</strong> Нажмите кнопку «Установить» в шапке, или в меню Chrome: «Добавить на главный экран».</li>
+    <li><strong>iPhone:</strong> В Safari нажмите кнопку «Поделиться» (квадрат со стрелкой) → «На экран Домой».</li>
+  </ul>
+  <p>После установки приложение запускается в полноэкранном режиме и работает даже без интернета (если карта скачана).</p>
+
+  <h2><span class="icon">❓</span> Частые вопросы</h2>
+
+  <div class="card">
+    <h3>Не работает геолокация / «Доступ запрещён»</h3>
+    <p>Приложению нужен доступ к GPS, чтобы показать ваше местоположение и вести по тропе. Если вы случайно запретили доступ:</p>
+    <p><strong>iPhone (Safari):</strong> Откройте Настройки телефона → Safari → Геопозиция → найдите этот сайт и выберите «Разрешить». Или: нажмите «аА» слева от адреса → «Настройки веб-сайта» → Геопозиция → Разрешить.</p>
+    <p><strong>Android (Chrome):</strong> Нажмите на значок замка слева от адреса сайта → «Местоположение» → Разрешить. Также проверьте, что GPS включён в настройках телефона.</p>
+  </div>
+
+  <div class="card">
+    <h3>Стрелка навигации крутится или не показывает направление</h3>
+    <p>На iOS нужно разрешить доступ к компасу при первом запуске навигации. Если вы отказали — зайдите в Настройки → Safari → разрешите доступ к датчику движения. Когда вы стоите на месте, стрелка может быть неточной — начните идти, и она скорректируется по GPS-курсу.</p>
+  </div>
+
+  <div class="card">
+    <h3>Карта не загружается</h3>
+    <p>Если вы в офлайне и не скачивали карту заранее — тайлы не покажутся. Трек и точки при этом будут видны. Вернитесь в зону связи и скачайте карту через меню.</p>
+  </div>
+
+  <div class="card">
+    <h3>GPS показывает неточное положение</h3>
+    <p>В густом лесу точность GPS может падать до 15-30 метров — это нормально. Двигайтесь по тропе и ориентируйтесь на трек. Приложение предупредит, если вы сильно отклонились.</p>
+  </div>
+
+  <a href="/" class="back-btn">← Вернуться к карте</a>
+</div>
+
+</body>
+</html>

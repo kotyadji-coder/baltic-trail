@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Балтийская Тропа — пешие походы и треккинг в Калининградской области</title>
+<meta name="description" content="Балтийская Тропа — пешеходный маршрут от Зеленоградска до Краснолесья через всю Калининградскую область. Треккинг, хайкинг и пешие прогулки мимо заброшенных кирх, лесных озёр и старых аллей." />
+<meta name="keywords" content="треккинг Калининград, пешие походы Калининградская область, хайкинг Калининград, пешеходный маршрут Калининград, ходить пешком Калининград, тропа Зеленоградск, пешие прогулки Калининград, балтийская тропа, Виштынецкий лес, Куршская коса пешком" />
+<link rel="canonical" href="https://baltictrail.ru/about.html" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="Балтийская Тропа — треккинг в Калининградской области" />
+<meta property="og:description" content="Пешеходный маршрут от побережья Балтики до древних лесов. Заброшенные кирхи, озёра, поля и деревни — места, которых нет в путеводителях." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://baltictrail.ru/about.html" />
+<meta property="og:locale" content="ru_RU" />
+<meta property="og:site_name" content="Балтийская Тропа" />
+
+<meta name="theme-color" content="#1b5e20" />
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+
+<!-- JSON-LD structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TouristAttraction",
+  "name": "Балтийская Тропа",
+  "description": "Пешеходный маршрут через Калининградскую область — от побережья Балтики в Зеленоградске до Виштынецкого леса у Краснолесья. Треккинг мимо заброшенных кирх, лесных озёр, полей и старых аллей.",
+  "url": "https://baltictrail.ru",
+  "touristType": ["Hikers", "Trekkers", "Nature lovers"],
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 54.72,
+    "longitude": 20.45
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressRegion": "Калининградская область",
+    "addressCountry": "RU"
+  },
+  "isAccessibleForFree": true
+}
+</script>
+
+<style>
+:root{--ink:#1d2421;--muted:#6b736d;--bg:#f6f7f5;--card:#fff;--line:#e0e3df;--blue:#29b6f6;--green:#1b5e20}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font:16px/1.7 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color:var(--ink);background:var(--bg);margin:0;padding:0;
+}
+a{color:var(--green)}
+
+/* Hero */
+.hero{
+  background:linear-gradient(135deg,#0277bd 0%,#29b6f6 50%,#81d4fa 100%);
+  color:#fff;padding:48px 20px 40px;text-align:center;
+}
+.hero svg{margin-bottom:12px}
+.hero h1{margin:0;font-size:28px;font-weight:800;letter-spacing:.01em}
+.hero .sub{font-size:15px;opacity:.85;margin-top:6px}
+.hero .cta{
+  display:inline-block;margin-top:20px;padding:12px 28px;
+  background:#fff;color:var(--green);border-radius:12px;
+  font-size:15px;font-weight:600;text-decoration:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.2);transition:transform .15s;
+}
+.hero .cta:hover{transform:translateY(-1px)}
+
+.container{max-width:720px;margin:0 auto;padding:32px 18px 60px}
+h2{font-size:22px;margin:36px 0 12px;color:var(--ink)}
+h3{font-size:17px;margin:24px 0 8px}
+p,li{font-size:15px;line-height:1.7;color:#3a3f3c}
+ul,ol{padding-left:20px}
+li{margin:4px 0}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin:16px 0}
+.card h3{margin:0 0 8px;font-size:16px}
+
+.stages{margin:20px 0;padding-left:14px;border-left:3px solid var(--line)}
+.stage{padding:10px 0 10px 14px;position:relative}
+.stage::before{
+  content:"";position:absolute;left:-10px;top:14px;
+  width:14px;height:14px;border-radius:50%;border:3px solid var(--line);background:#fff;
+}
+.stage.done::before{background:#4caf50;border-color:#4caf50}
+.stage.next::before{background:#29b6f6;border-color:#29b6f6}
+.stage h3{margin:0;font-size:15px}
+.stage p{margin:4px 0 0;font-size:13px;color:var(--muted)}
+
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:20px 0}
+.feat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center}
+.feat .icon{font-size:28px;margin-bottom:6px}
+.feat h3{margin:0 0 4px;font-size:14px}
+.feat p{margin:0;font-size:13px;color:var(--muted)}
+
+.seo-text{font-size:14px;line-height:1.7;color:#555}
+.seo-text h3{color:var(--ink);font-size:16px}
+
+footer{text-align:center;padding:24px;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
+footer a{color:var(--green);text-decoration:none}
+
+@media(max-width:480px){
+  .hero h1{font-size:22px}
+  .hero{padding:36px 16px 32px}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <svg viewBox="0 0 40 40" width="64" height="64" aria-hidden="true">
+    <circle cx="20" cy="20" r="19" fill="rgba(255,255,255,.2)"/>
+    <path d="M8 22 Q14 16 20 20 Q26 16 32 22" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <h1>Балтийская Тропа</h1>
+  <p class="sub">Пешеходный маршрут через всю Калининградскую область</p>
+  <a href="/" class="cta">Открыть карту маршрута</a>
+</div>
+
+<div class="container">
+
+  <h2>О тропе</h2>
+  <p>Балтийская Тропа — это пешеходный маршрут, который прокладывают энтузиасты от балтийского побережья <strong>Зеленоградска</strong> до древних лесов <strong>Виштынецкого природного парка</strong> у Краснолесья — через всю Калининградскую область.</p>
+
+  <p>Это не туристический аттракцион и не асфальтовая дорожка. Тропа идёт через места, которых нет в путеводителях: заброшенные немецкие кирхи, тихие лесные озёра, бескрайние поля, старые липовые аллеи и деревни, где время будто остановилось. Маршрут для тех, кто любит идти пешком и открывать настоящую Калининградскую область — не из окна экскурсионного автобуса, а своими ногами.</p>
+
+  <h2>Этапы маршрута</h2>
+  <div class="stages">
+    <div class="stage">
+      <h3>Янтарный — Светлогорск</h3>
+      <p>В планах. Побережье Балтики, янтарный карьер, дюны и курортные променады.</p>
+    </div>
+    <div class="stage">
+      <h3>Светлогорск — Зеленоградск</h3>
+      <p>В планах. Прибрежные леса и курортные города балтийского побережья.</p>
+    </div>
+    <div class="stage done">
+      <h3>Зеленоградск — Чкаловск</h3>
+      <p>Готов. Через посёлки и поля от побережья к городу — кирхи, аллеи и тихие дороги.</p>
+    </div>
+    <div class="stage next">
+      <h3>Калининград — Черняховск</h3>
+      <p>Следующий этап. Через Гвардейск, старые аллеи и поля Восточной Пруссии.</p>
+    </div>
+    <div class="stage">
+      <h3>Черняховск — Краснолесье</h3>
+      <p>В планах. Роминтенская пуща, Виштынецкий лес — один из старейших лесов Европы.</p>
+    </div>
+  </div>
+
+  <h2>Что вы увидите по дороге</h2>
+  <div class="features">
+    <div class="feat">
+      <div class="icon">🏚</div>
+      <h3>Заброшенные кирхи</h3>
+      <p>Готические руины, которым больше ста лет</p>
+    </div>
+    <div class="feat">
+      <div class="icon">🌊</div>
+      <h3>Балтийское побережье</h3>
+      <p>Песчаные пляжи и дюны Зеленоградска</p>
+    </div>
+    <div class="feat">
+      <div class="icon">🌳</div>
+      <h3>Старые леса</h3>
+      <p>Вековые дубы, буки и сосны</p>
+    </div>
+    <div class="feat">
+      <div class="icon">💧</div>
+      <h3>Озёра и реки</h3>
+      <p>Лесные озёра, тихие речки и родники</p>
+    </div>
+    <div class="feat">
+      <div class="icon">🌾</div>
+      <h3>Поля и аллеи</h3>
+      <p>Бескрайние поля и старые липовые аллеи</p>
+    </div>
+    <div class="feat">
+      <div class="icon">🏘</div>
+      <h3>Тихие деревни</h3>
+      <p>Посёлки с довоенной архитектурой</p>
+    </div>
+  </div>
+
+  <h2>Приложение для навигации</h2>
+  <p>Для тропы сделано бесплатное веб-приложение с картой, которое работает без интернета — прямо в лесу:</p>
+  <ul>
+    <li>Трек маршрута на карте с профилем высот</li>
+    <li>Навигация по тропе — стрелка показывает направление, вибрирует при отклонении</li>
+    <li>Точки интереса с описаниями вдоль маршрута</li>
+    <li>Офлайн-режим — скачайте карту заранее по Wi-Fi</li>
+    <li>Устанавливается на телефон как обычное приложение</li>
+  </ul>
+  <p><a href="/"><strong>Открыть карту маршрута →</strong></a></p>
+
+  <div class="seo-text">
+    <h2>Треккинг и пешие походы в Калининградской области</h2>
+
+    <h3>Хайкинг в Калининграде и окрестностях</h3>
+    <p>Калининградская область — один из самых недооценённых регионов России для пешего туризма. Мягкий балтийский климат, разнообразный рельеф и уникальное наследие Восточной Пруссии делают этот край идеальным для треккинга и хайкинга. Балтийская Тропа — первый размеченный пешеходный маршрут, который соединяет побережье Балтийского моря с древними лесами на юго-востоке области.</p>
+
+    <h3>Пешком от моря до леса</h3>
+    <p>Маршрут начинается в Зеленоградске — курортном городе на берегу Балтики, известном своими песчаными пляжами и довоенной архитектурой. Тропа ведёт через пригородные леса и парки к Калининграду, а затем — через сельскую местность к Черняховску и дальше к Виштынецкому лесу (Роминтенской пуще) — одному из старейших и наиболее сохранившихся лесных массивов Европы.</p>
+
+    <h3>Куда сходить пешком в Калининградской области</h3>
+    <p>Помимо Балтийской Тропы, в регионе есть пешеходные маршруты по Куршской косе, прогулки по историческому центру Калининграда, треки вдоль побережья Светлогорска и Янтарного. Но именно длинный маршрут от моря через всю область позволяет увидеть регион целиком — его разнообразие ландшафтов, заброшенные усадьбы и кирхи, тихие деревни и природу, нетронутую массовым туризмом.</p>
+
+    <h3>Как подготовиться к походу</h3>
+    <p>Балтийская Тропа подходит для пешеходов с базовой подготовкой. Специальное снаряжение не требуется — достаточно удобной обуви, запаса воды и заряженного телефона с установленным приложением для навигации. Маршрут проходит по грунтовым дорогам, лесным тропам и просёлочным дорогам. Рекомендуем скачать карту в приложении заранее — в лесу и в поле не всегда есть мобильная связь.</p>
+  </div>
+
+</div>
+
+<footer>
+  <a href="/">
+    <svg viewBox="0 0 40 40" width="24" height="24" style="vertical-align:middle;margin-right:6px">
+      <circle cx="20" cy="20" r="19" fill="#29b6f6"/>
+      <path d="M8 22 Q14 16 20 20 Q26 16 32 22" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Балтийская Тропа
+  </a>
+  <p>Частный проект энтузиастов пешего туризма в Калининградской области</p>
+</footer>
+
+</body>
+</html>
