@@ -1,6 +1,23 @@
 /* Тропа · Калининградская область — карта, трек, точки интереса, офлайн PWA */
 'use strict';
 
+// ---------- Theme ----------
+const THEME_KEY = 'tropa.theme';
+(function initTheme(){
+  const saved = localStorage.getItem(THEME_KEY);
+  if (saved === 'dark' || saved === 'light') document.documentElement.setAttribute('data-theme', saved);
+})();
+function setTheme(mode){
+  if (mode === 'auto'){ document.documentElement.removeAttribute('data-theme'); localStorage.removeItem(THEME_KEY); }
+  else { document.documentElement.setAttribute('data-theme', mode); localStorage.setItem(THEME_KEY, mode); }
+  document.querySelectorAll('.theme-btn').forEach(b => b.classList.toggle('active', b.dataset.theme === mode));
+}
+document.querySelectorAll('.theme-btn').forEach(b => b.addEventListener('click', () => setTheme(b.dataset.theme)));
+{ // highlight current choice
+  const cur = localStorage.getItem(THEME_KEY) || 'auto';
+  document.querySelectorAll('.theme-btn').forEach(b => b.classList.toggle('active', b.dataset.theme === cur));
+}
+
 // ---------- Categories ----------
 const CATS = {
   start:     { label:'Начало/финиш', icon:'🚩', color:'#2e7d32' },
