@@ -226,6 +226,12 @@ a.btn{text-decoration:none}
 [data-theme="dark"] .leaflet-control-attribution{background:rgba(26,29,27,.8)!important;color:var(--muted)}
 [data-theme="dark"] .leaflet-control-attribution a{color:var(--primary)}
 
+/* Dark map tiles */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .leaflet-tile-pane{filter:brightness(.75) contrast(1.1) saturate(.8)}
+}
+[data-theme="dark"] .leaflet-tile-pane{filter:brightness(.75) contrast(1.1) saturate(.8)}
+
 /* Toast */
 #toast{
   position:fixed;left:50%;bottom:calc(78px + var(--safe-b));transform:translateX(-50%);z-index:1200;
