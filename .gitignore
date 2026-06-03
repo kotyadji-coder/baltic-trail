@@ -1,6 +1,2 @@
 tropa-pwa.zip
 .DS_Store
-.env
-.env.*
-credentials/
-google-credentials.json
